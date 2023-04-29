@@ -41,9 +41,9 @@ def generate_prompt(habits: list[str], blocking_times: Optional[list]) -> str:
     prmt = examples + "\n"
     prmt += "Given that I want to build the following habits:\n"
     for i in range(len(habits)):
-        prmt += f'{i}. [{habits[i]}]\n'
+        prmt += f'{i + 1}. [{habits[i]}]\n'
 
-    if blocking_times is not None:
+    if blocking_times:
         prmt += "DO NOT SCHEDULE AT THE FOLLOWING TIMES:\n"
         for time in blocking_times:
             prmt += f"[{time[0]} to {time[1]}]\n"
@@ -65,7 +65,7 @@ def run_scraper(query: str) -> str:
         by=By.XPATH,
         value='//textarea[@placeholder="Ask anything..."]')
     
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(20)
     search_box.send_keys(query + Keys.ENTER)
     answer = driver.find_element(by=By.CLASS_NAME, value='prose')
     table = answer.find_element(by=By.XPATH, value='//table[@class="border w-full border-borderMain dark:border-borderMainDark"]')
@@ -83,7 +83,7 @@ if __name__ == "__main__":
     blocking_times = get_blocking_times()
     prompt = generate_prompt(habits, blocking_times)
     print(prompt)
-    print('-------------------------------------------------------------------------------')
+    print('-----------------------------------------------------------------------------------')
     answer = run_scraper(prompt)
     result = parse_answer(answer)
     print(result)
