@@ -4,7 +4,6 @@ from selenium.webdriver.edge.options import Options as EdgeOptions
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
-
 from datetime import datetime
 from typing import Optional
 
@@ -14,17 +13,42 @@ def get_habits(num: int) -> list[str]:
     habits = []
     for i in range(num):
         habits.append(input(f'Habit {i + 1}:'))
-
     return habits
 
 
 def get_blocking_times() -> Optional[list]:
     """get blocking time(s)"""
+    blocking_times = []
+    i = 1
 
+    print('Please list all of your blocking times as interval HH:MM - HH:MM')
+    while True:
+        user_input = input(f'Blocking times {i}:')
+        i += 1
+
+        if user_input == '':
+            break
+
+        blocking_times.append(tuple(user_input.split(' - ')))
+
+    return blocking_times
 
 def generate_prompt(habits: list[str], blocking_times: Optional[list]) -> str:
     """generate string prompt"""
+    # TODO: Make examples for reproducibility
+    examples = ""
+    prmt = examples + "\n"
+    prmt += "Given that I want to build the following habits:\n"
+    for i in range(len(habits)):
+        prmt += f'{i}. [{habits[i]}]\n'
 
+    if blocking_times is not None:
+        prmt += "DO NOT SCHEDULE AT THE FOLLOWING TIMES:\n"
+        for time in blocking_times:
+            prmt += f"[{time[0]} to {time[1]}]\n"
+
+    prmt += "Make a formatted schedule in a table with the following format:" \
+            "[time: start - end] | [activity]"
 
 def run_scraper(query: str) -> str:
     """run scraper, get answer"""
