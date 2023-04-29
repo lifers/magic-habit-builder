@@ -18,7 +18,20 @@ def get_habits(num: int) -> list[str]:
 
 def get_blocking_times() -> Optional[list]:
     """get blocking time(s)"""
+    blocking_times = []
+    i = 1
 
+    print('Please list all of your blocking times as interval HH:MM - HH:MM')
+    while True:
+        user_input = input(f'Blocking times {i}:')
+        i += 1
+
+        if user_input == '':
+            break
+
+        blocking_times.append(tuple(user_input.split(' - ')))
+
+    return blocking_times
 
 def generate_prompt(habits: list[str], blocking_times: Optional[list]) -> str:
     """generate string prompt"""
