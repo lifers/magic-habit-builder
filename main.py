@@ -33,6 +33,7 @@ def get_blocking_times() -> Optional[list]:
 
     return blocking_times
 
+
 def generate_prompt(habits: list[str], blocking_times: Optional[list]) -> str:
     """generate string prompt"""
     # TODO: Make examples for reproducibility
@@ -49,6 +50,7 @@ def generate_prompt(habits: list[str], blocking_times: Optional[list]) -> str:
 
     prmt += "Make a formatted schedule in a table with the following format:" \
             "[time: start - end] | [activity]"
+    return prmt
 
 def run_scraper(query: str) -> str:
     """run scraper, get answer"""
