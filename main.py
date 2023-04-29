@@ -20,6 +20,20 @@ def get_habits(num: int) -> list[str]:
 
 def get_blocking_times() -> Optional[list]:
     """get blocking time(s)"""
+    blocking_times = []
+    i = 1
+
+    print('Please list all of your blocking times as interval HH:MM - HH:MM')
+    while True:
+        user_input = input(f'Blocking times {i}:')
+        i += 1
+
+        if user_input == '':
+            break
+
+        blocking_times.append(tuple(user_input.split(' - ')))
+
+    return blocking_times
 
 
 def generate_prompt(habits: list[str], blocking_times: Optional[list]) -> str:
@@ -35,7 +49,7 @@ def run_scraper(query: str) -> str:
     search_box = driver.find_element(
         by=By.XPATH,
         value='//textarea[@placeholder="Ask anything..."]')
-    
+
     search_box.send_keys(query + Keys.ENTER)
     driver.implicitly_wait(10)
     answer = driver.find_element(by=By.CLASS_NAME, value='prose')
