@@ -36,12 +36,12 @@
       to right,
       #ff6a00,
       #ee0979
-    ); 
+    );
     background: linear-gradient(
       to right,
       #ff6a00,
       #ee0979
-    ); 
+    );
     background-size: 100%;
     -webkit-background-clip: text;
     -moz-background-clip: text;
@@ -61,7 +61,7 @@
       to right,
       #8f0eff,
       #da22ff
-    ); 
+    );
     background-size: 100%;
     -webkit-background-clip: text;
     -moz-background-clip: text;
@@ -72,12 +72,12 @@
   .highlight {
     border-bottom: 4px solid rgb(132, 0, 255);
   }
-  
+
   @media screen and (max-width: 768px) {
     .habit__heading {
       font-size: 60px;
     }
-  
+
     .habit__description {
       font-size: 40px;
     }

@@ -51,7 +51,6 @@ def generate_prompt(habits: list[str], blocking_times: Optional[list]) -> str:
 
     prmt += "Make a formatted schedule in a table with the following format:" \
             "[time: start - end] | [activity]"
-    
     return prmt
 
 
@@ -66,7 +65,6 @@ def run_scraper(query: str) -> str:
     search_box = driver.find_element(
         by=By.XPATH,
         value='//textarea[@placeholder="Ask anything..."]')
-    
     search_box.send_keys(query + Keys.ENTER)
     wait = WebDriverWait(driver, 30, 5).until(lambda d: d.find_element(by=By.XPATH, value='//textarea[@placeholder="Ask follow-up..."]'))
     answer = driver.find_element(by=By.CLASS_NAME, value='prose')
