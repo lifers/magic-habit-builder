@@ -1,11 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_file
 from forms import ThreeBoxForm, BlockTimeForm
 
 # Create the application.
 APP = Flask(__name__)
 APP.config['SECRET_KEY'] = "121r2h3oh23h45jh23l4"
 
-habits = []
+habits_lst = []
 blocks = []
 
 
@@ -17,9 +17,9 @@ def home():
 @APP.route('/habits', methods=['get', 'post'])
 def habits():
     form = ThreeBoxForm()
-    habits.clear()
+    habits_lst.clear()
     if not (form.box1.data is None or form.box2.data is None or form.box3.data is None):
-        habits.extend([form.box1.data, form.box2.data, form.box3.data])
+        habits_lst.extend([form.box1.data, form.box2.data, form.box3.data])
     return render_template("habits.html", form=form)
 
 
@@ -34,6 +34,10 @@ def blocktimes():
 
     return render_template('blocktimes.html', form=form)
 
+
+@APP.route('/style.css')
+def serve_static():
+    return send_file('templates/style.css')
 
 if __name__ == '__main__':
     APP.debug = True
