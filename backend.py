@@ -14,23 +14,20 @@ def home():
     print(form.box2.data)
     print(form.box3.data)
     print(form.date.data)
-    return render_template("home.html", form=form)
+    return render_template("habits.html", form=form)
 
 
-@APP.route('/result', methods=['get', 'post'])
+@APP.route('/', methods=['get', 'post'])
 def result():
-    if "habits" in session and "schedule" in session:
-        habits = session["habits"]
-        schedule = session["schedule"]
-        prompt = mn.generate_prompt(habits, schedule)
+    if habits:
+        prompt = mn.generate_prompt(habits, blocks)
         reply = mn.run_scraper(prompt)
         raw_res = mn.parse_answer(reply)
         res = raw_res
-        return f"{res}"
-    elif "schedule" not in session:
-        return redirect(url_for(""))
-    elif "habits" not in session:
-        return redirect(url_for(""))
+        res = res.split("\n")
+        for schedule in res:
+            schedule.strip()
+        return render_template("base.html", res=res)
     else:
         return redirect(url_for("home"))
 
@@ -38,5 +35,3 @@ def result():
 if __name__ == '__main__':
     APP.debug = True
     APP.run()
-
-
