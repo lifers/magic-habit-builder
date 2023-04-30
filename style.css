@@ -82,6 +82,7 @@
       font-size: 40px;
     }
   }
+<<<<<<< Updated upstream
 
   .main__btn {
   font-size: 1.8rem;
@@ -124,3 +125,7 @@
 .main__btn:hover:after {
   width: 100%;
 }
+=======
+  
+  
+>>>>>>> Stashed changes
