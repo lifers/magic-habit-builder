@@ -3,6 +3,7 @@ from selenium.webdriver.edge.service import Service as EdgeService
 from selenium.webdriver.edge.options import Options as EdgeOptions
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from datetime import datetime
 from typing import Optional
@@ -56,7 +57,8 @@ def generate_prompt(habits: list[str], blocking_times: Optional[list]) -> str:
 
 def run_scraper(query: str) -> str:
     """run scraper, get answer"""
-    options = EdgeOptions().add_argument(argument=['start-fullscreen'])
+    options = EdgeOptions()
+    options.add_argument("--headless")
     driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()), options=options)
     driver.maximize_window()
 
@@ -65,8 +67,8 @@ def run_scraper(query: str) -> str:
         by=By.XPATH,
         value='//textarea[@placeholder="Ask anything..."]')
     
-    driver.implicitly_wait(20)
     search_box.send_keys(query + Keys.ENTER)
+    wait = WebDriverWait(driver, 30, 5).until(lambda d: d.find_element(by=By.XPATH, value='//textarea[@placeholder="Ask follow-up..."]'))
     answer = driver.find_element(by=By.CLASS_NAME, value='prose')
     table = answer.find_element(by=By.XPATH, value='//table[@class="border w-full border-borderMain dark:border-borderMainDark"]')
 

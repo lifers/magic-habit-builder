@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <!-- Normal CSS -->
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body style="background-color: black; height: 100vh">
+    <div class="justify-content-center" style="padding: 200px">
+        <h1 class="text-center" style="color: white">What are you trying to
+            <span style="background: -webkit-linear-gradient(left, red, yellow, purple); -webkit-background-clip: text;
+             -webkit-text-fill-color: transparent;">achieve</span>?</h1>
+        <form method="post" action="/" class="form-signin">
+            <div class="p-4 d-flex justify-content-center">
+                {{form.box1(class="form-control form-control-lg w-75",
+                style="background-color: black; scale: 1.5; border: 2px solid red")}}
+            </div>
+            <div class="p-4 d-flex justify-content-center">
+                {{form.box2(class="form-control form-control-lg w-75",
+                style="background-color: black; scale: 1.5; border: 2px solid yellow")}}
+            </div>
+            <div class="p-4 d-flex justify-content-center">
+                {{form.box3(class="form-control form-control-lg w-75",
+                style="background-color: black; scale: 1.5; border: 2px solid purple")}}
+            </div>
+            <div class="p-4 d-flex justify-content-center">
+                {{form.submit(class="btn btn-outline-info", style="scale: 2")}}
+            </div>
+        </form>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
