@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask, redirect, url_for, render_template, send_file
 from forms import ThreeBoxForm, BlockTimeForm
 import main as mn
 
@@ -51,6 +51,10 @@ def blocktimes():
 
     return render_template('blocktimes.html', form=form)
 
+
+@APP.route('/style.css')
+def serve_static():
+    return send_file('templates/style.css')
 
 if __name__ == '__main__':
     APP.debug = True
